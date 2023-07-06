@@ -1,5 +1,6 @@
 import { useRouteError } from 'react-router-dom'
 
+// This is the error page for the entire application. It's the fallback for any route that fails to render.
 export default function ErrorPage() {
 	const error = useRouteError()
 	console.error(error)
