@@ -1,6 +1,14 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLoaderData } from 'react-router-dom'
+import { getContacts } from '../contacts'
+
+// loader function is called to get data for the route
+export async function loader() {
+	const contacts = await getContacts()
+	return { contacts }
+}
 
 export default function Root() {
+	const { contacts } = useLoaderData()
 	return (
 		<>
 			<div id='sidebar'>
@@ -22,6 +30,30 @@ export default function Root() {
 					</form>
 				</div>
 				<nav>
+					{contacts.length ? (
+						<ul>
+							{contacts.map((contact) => (
+								<li key={contact.id}>
+									<Link to={`/contacts/${contact.id}`}>
+										{contact.first || contact.last ? (
+											<>
+												{contact.first} {contact.last}
+											</>
+										) : (
+											<i>No Name</i>
+										)}
+										{''}
+										{contact.favorite && <span>⭐️</span>}
+									</Link>
+								</li>
+							))}
+						</ul>
+					) : (
+						<p>
+							<i>No contacts</i>
+						</p>
+					)}
+
 					<ul>
 						<li>
 							{/* The Link component enables client-side navigation.
