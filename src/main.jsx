@@ -12,6 +12,7 @@ const router = createBrowserRouter([
 		path: '/',
 		element: <Root />,
 		errorElement: <ErrorPage />,
+		// This route has child routes. It will render its element, and then render its child routes into its outlet.
 		children: [
 			{
 				path: '/contacts/:contactId',

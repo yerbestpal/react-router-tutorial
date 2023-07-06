@@ -33,6 +33,7 @@ export default function Root() {
 				</nav>
 			</div>
 			<div id='detail'>
+				{/* This is where the child routes will render. */}
 				<Outlet />
 			</div>
 		</>
