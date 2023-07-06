@@ -24,6 +24,8 @@ export default function Root() {
 				<nav>
 					<ul>
 						<li>
+							{/* The Link component enables client-side navigation.
+                                This is preferred over <a> tags which request documents from the server.  */}
 							<Link to={`/contacts/1`}>Your Name</Link>
 						</li>
 						<li>
