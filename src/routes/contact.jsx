@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { Form, useLoaderData } from 'react-router-dom'
 import { getContact } from '../contacts'
 
@@ -77,4 +78,10 @@ function Favorite({ contact }) {
 			</button>
 		</Form>
 	)
+}
+
+Favorite.propTypes = {
+	contact: PropTypes.shape({
+		favorite: PropTypes.any,
+	}),
 }

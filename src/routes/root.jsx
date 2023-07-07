@@ -44,16 +44,17 @@ export default function Root() {
 						<ul>
 							{contacts.map((contact) => (
 								<li key={contact.id}>
-									<Link to={`/contacts/${contact.id}`}>
+									{/* The Link component enables client-side navigation.
+                                    This is preferred over <a> tags which request documents from the server.  */}
+									<Link to={`contacts/${contact.id}`}>
 										{contact.first || contact.last ? (
 											<>
 												{contact.first} {contact.last}
 											</>
 										) : (
 											<i>No Name</i>
-										)}
-										{''}
-										{contact.favorite && <span>⭐️</span>}
+										)}{' '}
+										{contact.favorite && <span>⭐</span>}
 									</Link>
 								</li>
 							))}
@@ -63,17 +64,6 @@ export default function Root() {
 							<i>No contacts</i>
 						</p>
 					)}
-
-					<ul>
-						<li>
-							{/* The Link component enables client-side navigation.
-                                This is preferred over <a> tags which request documents from the server.  */}
-							<Link to={`/contacts/1`}>Your Name</Link>
-						</li>
-						<li>
-							<Link to={`/contacts/2`}>Your Friend</Link>
-						</li>
-					</ul>
 				</nav>
 			</div>
 			<div id='detail'>

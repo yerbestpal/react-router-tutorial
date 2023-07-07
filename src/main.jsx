@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ErrorPage from './error-page'
 import Contact, { loader as contactLoader } from './routes/contact'
 import Root, { loader as rootLoader, action as rootAction } from './routes/root'
-import EditContact from './routes/edit'
+import EditContact, { action as editAction } from './routes/edit'
 
 const router = createBrowserRouter([
 	{
@@ -31,6 +31,7 @@ const router = createBrowserRouter([
 				// This means the data for the Contact route will be reused for the EditContact route.
 				// This is lazy but purely for the needs of this tutorial. Ideally, you'd have a separate loader function for each route.
 				loader: contactLoader,
+				action: editAction,
 			},
 		],
 	},
