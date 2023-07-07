@@ -17,6 +17,8 @@ const router = createBrowserRouter([
 		// This route has child routes. It will render its element, and then render its child routes into its outlet.
 		children: [
 			{
+				// The colon indicates a URL parameter. This route will match /contacts/123, /contacts/abc, etc.
+				// The value of the parameter will be available in the route's params.
 				path: '/contacts/:contactId',
 				element: <Contact />,
 			},
