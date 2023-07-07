@@ -1,4 +1,11 @@
-import { Link, Outlet, useLoaderData, Form, redirect } from 'react-router-dom'
+import {
+	Link,
+	Outlet,
+	NavLink,
+	useLoaderData,
+	Form,
+	redirect,
+} from 'react-router-dom'
 import { getContacts, createContact } from '../contacts'
 
 // action function is called to create data.
@@ -47,7 +54,12 @@ export default function Root() {
 								<li key={contact.id}>
 									{/* The Link component enables client-side navigation.
                                     This is preferred over <a> tags which request documents from the server.  */}
-									<Link to={`contacts/${contact.id}`}>
+									<NavLink
+										to={`contacts/${contact.id}`}
+										className={({ isActive, isPending }) =>
+											isActive ? 'active' : isPending ? 'pending' : ''
+										}
+									>
 										{contact.first || contact.last ? (
 											<>
 												{contact.first} {contact.last}
@@ -56,7 +68,7 @@ export default function Root() {
 											<i>No Name</i>
 										)}{' '}
 										{contact.favorite && <span>⭐</span>}
-									</Link>
+									</NavLink>
 								</li>
 							))}
 						</ul>
