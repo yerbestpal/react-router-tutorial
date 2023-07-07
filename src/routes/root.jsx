@@ -31,7 +31,10 @@ export default function Root() {
 						<div id='search-spinner' aria-hidden hidden={true} />
 						<div className='sr-only' aria-live='polite'></div>
 					</form>
-					{/* The Form component uses client-side routing and send form data to a route action */}
+					{/* The Form component uses client-side routing and send form data to a route action. */}
+					{/* Form prevents the browser from sending the request to the server and sends it to the route action instead. */}
+					{/* A POST usually means some data is changing. React Router uses this as a hint to automatically revalidate the data on the page. */}
+					{/* This means all `useLoaderData` hooks update and the UI stays in sync with the data automatically. */}
 					<Form method='post'>
 						<button type='submit'>New</button>
 					</Form>
