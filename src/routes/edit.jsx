@@ -11,6 +11,7 @@ export async function action({ request, params }) {
 
 export default function EditContact() {
   const { contact } = useLoaderData()
+  // navigate is used to implement the cancel button.
   const navigate = useNavigate()
 
   return (
@@ -57,6 +58,8 @@ export default function EditContact() {
       </label>
       <p>
         <button type="submit">Save</button>
+        {/* There is no `event.preventDefault` on this button because `type="button"` the HTML way of preventing a
+         button from submitting its form.*/}
         <button type="button" onClick={() => navigate(-1)}>
           Cancel
         </button>
