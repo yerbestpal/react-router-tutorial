@@ -75,7 +75,10 @@ export default function Root() {
       </div>
       <div
         id="detail"
-        className={navigation.state === 'loading' ? 'loading' : ''}
+        className={
+          /* Using navigation state to trigger CSS. */
+          navigation.state === 'loading' ? 'loading' : ''
+        }
       >
         {/* This is where the child routes will render. */}
         <Outlet />
