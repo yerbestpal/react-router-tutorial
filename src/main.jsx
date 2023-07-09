@@ -7,6 +7,7 @@ import Contact, { loader as contactLoader } from './routes/contact'
 import Root, { action as rootAction, loader as rootLoader } from './routes/root'
 import EditContact, { action as editAction } from './routes/edit'
 import { action as destroyAction } from './routes/destroy'
+import Index from './routes/index.jsx'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,11 @@ const router = createBrowserRouter([
     action: rootAction,
     // This route has child routes. It will render its element, and then render its child routes into its outlet.
     children: [
+      {
+        // This is the index route. It will be rendered when the URL matches the parent routes exact path.
+        index: true,
+        element: <Index />,
+      },
       {
         // The colon indicates a URL parameter. This route will match /contacts/123, /contacts/abc, etc.
         // The value of the parameter will be available in the route's params.
