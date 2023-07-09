@@ -48,6 +48,18 @@ export default function Contact() {
           <Form action="edit">
             <button type="submit">Edit</button>
           </Form>
+          {/* Deleting works by:
+
+           1. `<Form>` prevents the default browser behaviour of sending a new POST request to the server, but instead
+               emulates the browser by creating a POST request with client-side routing.
+
+           2. The `<Form action="destroy">` matches the new route at `"contacts/:contactId/destroy"` and sends it the
+              request.
+
+           3. After the action redirects, React Router calls all of the loaders for the data on the page to get the
+              latest values (this is "revalidation"). `useLoaderData` returns new values and causes the components to
+              update.
+          */}
           <Form
             method="post"
             action="destroy"
