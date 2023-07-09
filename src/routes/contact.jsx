@@ -1,16 +1,16 @@
-import PropTypes from 'prop-types';
-import {Form, useLoaderData} from 'react-router-dom';
-import {getContact} from '../contacts';
+import PropTypes from 'prop-types'
+import {Form, useLoaderData} from 'react-router-dom'
+import {getContact} from '../contacts'
 
 // Loader function is called to get data for the route.
 export async function loader({ params }) {
-  const contact = await getContact(params.contactId);
-  return { contact };
+  const contact = await getContact(params.contactId)
+  return { contact }
 }
 
 export default function Contact() {
   // Destructuring here is absolutely necessary.
-  const { contact } = useLoaderData();
+  const { contact } = useLoaderData()
 
   return (
     <div id="contact">
@@ -53,7 +53,7 @@ export default function Contact() {
             action="destroy"
             onSubmit={(event) => {
               if (!confirm('Please confirm you want to delete this record.')) {
-                event.preventDefault();
+                event.preventDefault()
               }
             }}
           >
@@ -62,12 +62,12 @@ export default function Contact() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function Favorite({ contact }) {
   // yes, this is a `let` for later
-  let favorite = contact.favorite;
+  let favorite = contact.favorite
   return (
     <Form method="post">
       <button
@@ -78,11 +78,11 @@ function Favorite({ contact }) {
         {favorite ? '★' : '☆'}
       </button>
     </Form>
-  );
+  )
 }
 
 Favorite.propTypes = {
   contact: PropTypes.shape({
     favorite: PropTypes.any,
   }),
-};
+}

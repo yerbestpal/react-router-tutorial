@@ -1,16 +1,16 @@
-import {Form, redirect, useLoaderData} from 'react-router-dom';
-import {updateContact} from '../contacts';
+import {Form, redirect, useLoaderData} from 'react-router-dom'
+import {updateContact} from '../contacts'
 
 // Action function is called to create data.
 export async function action({ request, params }) {
-  const formData = await request.formData();
-  const updates = Object.fromEntries(formData);
-  await updateContact(params.contactId, updates);
-  return redirect(`/contacts/${params.contactId}`);
+  const formData = await request.formData()
+  const updates = Object.fromEntries(formData)
+  await updateContact(params.contactId, updates)
+  return redirect(`/contacts/${params.contactId}`)
 }
 
 export default function EditContact() {
-  const { contact } = useLoaderData();
+  const { contact } = useLoaderData()
 
   return (
     <Form method="post" id="contact-form">
@@ -59,5 +59,5 @@ export default function EditContact() {
         <button type="button">Cancel</button>
       </p>
     </Form>
-  );
+  )
 }
