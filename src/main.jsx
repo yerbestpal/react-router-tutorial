@@ -40,6 +40,7 @@ const router = createBrowserRouter([
         // This is a common pattern for actions that change data on the server.
         // Thus, there is no element or loader for this route.
         action: destroyAction,
+        errorElement: <div>Oops! There was an error.</div>,
       },
     ],
   },
