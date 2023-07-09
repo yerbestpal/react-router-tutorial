@@ -1,14 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ErrorPage from './error-page';
-import Contact, { loader as contactLoader } from './routes/contact';
-import Root, {
-  action as rootAction,
-  loader as rootLoader,
-} from './routes/root';
-import EditContact, { action as editAction } from './routes/edit';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import ErrorPage from './error-page'
+import Contact, { loader as contactLoader } from './routes/contact'
+import Root, { action as rootAction, loader as rootLoader } from './routes/root'
+import EditContact, { action as editAction } from './routes/edit'
+import { action as destroyAction } from './routes/destroy'
 
 const router = createBrowserRouter([
   {
@@ -36,12 +34,19 @@ const router = createBrowserRouter([
         loader: contactLoader,
         action: editAction,
       },
+      {
+        path: '/contacts/:contactId/destroy',
+        // This route has no UI of its own. It only performs an action and then redirects to another page.
+        // This is a common pattern for actions that change data on the server.
+        // Thus, there is no element or loader for this route.
+        action: destroyAction,
+      },
     ],
   },
-]);
+])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>,
-);
+)
