@@ -1,21 +1,22 @@
-import {Form, NavLink, Outlet, redirect, useLoaderData,} from 'react-router-dom';
-import {createContact, getContacts} from '../contacts';
+import {Form, NavLink, Outlet, redirect, useLoaderData, useNavigation,} from 'react-router-dom'
+import {createContact, getContacts} from '../contacts' // action function is called to create data.
 
 // action function is called to create data.
 export async function action() {
-  const contact = await createContact();
+  const contact = await createContact()
   // redirect to the edit page for the new contact.
-  return redirect(`/contacts/${contact.id}/edit`);
+  return redirect(`/contacts/${contact.id}/edit`)
 }
 
 // loader function is called to get data for the route.
 export async function loader() {
-  const contacts = await getContacts();
-  return { contacts };
+  const contacts = await getContacts()
+  return { contacts }
 }
 
 export default function Root() {
-  const { contacts } = useLoaderData();
+  const { contacts } = useLoaderData()
+  const navigation = useNavigation()
   return (
     <>
       <div id="sidebar">
@@ -72,10 +73,13 @@ export default function Root() {
           )}
         </nav>
       </div>
-      <div id="detail">
+      <div
+        id="detail"
+        className={navigation.state === 'loading' ? 'loading' : ''}
+      >
         {/* This is where the child routes will render. */}
         <Outlet />
       </div>
     </>
-  );
+  )
 }
