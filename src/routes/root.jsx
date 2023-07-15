@@ -53,7 +53,16 @@ export default function Root() {
               // The `submit` hook is a function that takes a form element as an argument.
               // It returns a function that submits the form.
               // Thus, the UI updates when the form is updated on change.
-              onChange={(event) => submit(event.currentTarget.form)}
+              onChange={(event) => {
+                // Managing the history stack is a common pattern in web apps.
+                // The `replace` option replaces the current history entry instead of adding a new one.
+                // This is useful for search forms, where you don't want the search to be in the history stack.
+                // The `replace` option is also useful for forms that redirect to a new page.
+                const isFirstSearch = q == null
+                submit(event.currentTarget.form, {
+                  replace: !isFirstSearch,
+                })
+              }}
             />
             <div id="search-spinner" aria-hidden hidden={!searching} />
             <div className="sr-only" aria-live="polite"></div>
