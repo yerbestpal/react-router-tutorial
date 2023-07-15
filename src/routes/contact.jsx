@@ -92,6 +92,12 @@ function Favorite({ contact }) {
   const fetcher = useFetcher()
   // yes, this is a `let` for later
   let favorite = contact.favorite
+  if (fetcher.formData) {
+    // If the form data is available, then the form has been submitted, and we can update the favorite without waiting
+    // for the network request to complete.
+    // This is called "optimistic updates/UI".
+    favorite = fetcher.formData.get('favorite') === 'true'
+  }
 
   return (
     // fetcher must be used inside a <Form> component.
