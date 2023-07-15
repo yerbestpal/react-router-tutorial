@@ -8,9 +8,13 @@ export async function action() {
   return redirect(`/contacts/${contact.id}/edit`)
 }
 
-// loader function is called to get data for the route.
-export async function loader() {
-  const contacts = await getContacts()
+// Loader function is called to get data for the route.
+// This function always uses `url.searchParams` to get the query string parameters.
+// If there are no query string parameters, `url.searchParams` will be an empty string, and return all contacts.
+export async function loader({ request }) {
+  const url = new URL(request.url)
+  const q = url.searchParams.get('q')
+  const contacts = await getContacts(q)
   return { contacts }
 }
 
@@ -22,7 +26,10 @@ export default function Root() {
       <div id="sidebar">
         <h1>React Router Contacts</h1>
         <div>
-          <form id="search-form" role="search">
+          {/* This form uses the default method, `get`. That means when the browser creates the request for the next
+           document, it doesn't put the form data into the request POST body, but into the `urlSearchParams` of a GET
+            request.*/}
+          <Form id="search-form" role="search">
             <input
               id="q"
               aria-label="Search contacts"
@@ -32,7 +39,7 @@ export default function Root() {
             />
             <div id="search-spinner" aria-hidden hidden={true} />
             <div className="sr-only" aria-live="polite"></div>
-          </form>
+          </Form>
           {/* The Form component uses client-side routing and send form data to a route action. */}
           {/* Form prevents the browser from sending the request to the server and sends it to the route action instead. */}
           {/* A POST usually means some data is changing. React Router uses this as a hint to automatically revalidate the data on the page. */}
