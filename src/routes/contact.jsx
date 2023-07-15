@@ -1,11 +1,19 @@
 import PropTypes from 'prop-types'
-import {Form, useLoaderData} from 'react-router-dom'
-import {getContact} from '../contacts'
+import {Form, useFetcher, useLoaderData} from 'react-router-dom'
+import {getContact, updateContact} from '../contacts' // Loader function is called to get data for the route.
 
 // Loader function is called to get data for the route.
 export async function loader({ params }) {
   const contact = await getContact(params.contactId)
   return { contact }
+}
+
+// Action function is called to update data.
+export async function action({ request, params }) {
+  let formData = await request.formData()
+  return updateContact(params.contactId, {
+    favorite: formData.get('favorite') === 'true',
+  })
 }
 
 export default function Contact() {
@@ -78,10 +86,16 @@ export default function Contact() {
 }
 
 function Favorite({ contact }) {
+  // `useFetcher` is a hook that allows you to communicate with loaders and actions without causing a navigation.
+  // I.e., mutation without navigation.
+  // It's useful for things like toggling a favorite without causing a navigation.
+  const fetcher = useFetcher()
   // yes, this is a `let` for later
   let favorite = contact.favorite
+
   return (
-    <Form method="post">
+    // fetcher must be used inside a <Form> component.
+    <fetcher.Form method="post">
       <button
         name="favorite"
         value={favorite ? 'false' : 'true'}
@@ -89,7 +103,7 @@ function Favorite({ contact }) {
       >
         {favorite ? '★' : '☆'}
       </button>
-    </Form>
+    </fetcher.Form>
   )
 }
 
