@@ -7,6 +7,7 @@ export async function loader({ params }) {
   const contact = await getContact(params.contactId)
   if (!contact) {
     // If the contact doesn't exist, redirect to the 404 page.
+    // This is a special case where we're returning a Response object instead of an object with a `contact` property.
     throw new Response('', { status: 404, statusText: 'Not Found' })
   }
   return { contact }
