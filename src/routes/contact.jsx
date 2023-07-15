@@ -5,6 +5,10 @@ import {getContact, updateContact} from '../contacts' // Loader function is call
 // Loader function is called to get data for the route.
 export async function loader({ params }) {
   const contact = await getContact(params.contactId)
+  if (!contact) {
+    // If the contact doesn't exist, redirect to the 404 page.
+    throw new Response('', { status: 404, statusText: 'Not Found' })
+  }
   return { contact }
 }
 
