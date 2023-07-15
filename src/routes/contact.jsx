@@ -69,7 +69,7 @@ export default function Contact() {
            2. The `<Form action="destroy">` matches the new route at `"contacts/:contactId/destroy"` and sends it the
               request.
 
-           3. After the action redirects, React Router calls all of the loaders for the data on the page to get the
+           3. After the action redirects, React Router calls all the loaders for the data on the page to get the
               latest values (this is "revalidation"). `useLoaderData` returns new values and causes the components to
               update.
           */}
